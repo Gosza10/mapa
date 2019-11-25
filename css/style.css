@@ -1,0 +1,33 @@
+/* Global */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.carousel-inner .carousel-item {
+  height: 100vh;
+}
+
+.img .carousel-item {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card-image img {
+  width: 100%;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card img {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.end {
+  background: #eff2f5;
+}
+/*# sourceMappingURL=style.css.map */
