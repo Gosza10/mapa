@@ -1,78 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <title>Wczesnośredniowieczne grodziska</title>
 <head>
-<!--tag responsywności-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--Link do biblioteki Leaflet-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+<!-- MAPBOX -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+<!-- AJAX -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>  
+<script src="//rawgit.com/bassjobsen/Bootstrap-3-Typeahead/master/bootstrap3-typeahead.js"></script> 
+<!-- LEAFLET -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<!--Link do biblioteki jQuey-->
-<script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!-- SLIDER -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/css/bootstrap-slider.min.css" />
+<!-- Ajax-->
+<script src="https://rawgit.com/calvinmetcalf/leaflet-ajax/gh-pages/dist/leaflet.ajax.js"></script>	
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<link rel='stylesheet prefetch' href='http://mrmufflon.github.io/Leaflet.Coordinates/dist/Leaflet.Coordinates-0.1.3.css'>
-<script src='http://mrmufflon.github.io/Leaflet.Coordinates/dist/Leaflet.Coordinates-0.1.3.min.js'></script>
-<style>
-#map{
-position: absolute;
-display: block;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-}
-#panel{
-position:fixed;
-right: 7px;
-top: 10px;
-}
-#menu{
-background-color: white;
-padding: 10px;
- width: 150px;
- border: solid 1px #c3c3c3;
- text-align: center;
-}
-#menu_res{
-background-color: white;
- padding: 10px;
- width: 150px;
- border: solid 1px #c3c3c3;
- display: none;
-}
+	<!--Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script> 
 
-</style>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 </head>
 <body>
+	<nav class="navigation">
+        <div class="container">
+        	<ul>
+                <li class="iteam">
+        	        <a href="glowna.html">Strona Główna</a>
+                </li>
+                <li class="iteam">
+                	<a href="index.html">Mapa</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <!--warstwa mapy-->
-<div id="map"> </div>
-<!--warstwa panelu-->
-	<div id="panel">
-<!--warstwa nagłówka menu-->
-		<div id="menu" > Menu </div>
-<!--warstwa zawartości menu-->
-			<div id="menu_res">
-				<div id="grodziska_84"><label><input type="checkbox" value="grodziska_84">grodziska</label></div>
-				<div id="legenda1">
-<!--adres dla legendy: trzeba podać własne nazwy warstw dla argumentu LAYER-->
-					<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=grody:grodziska_84">
+<div class="container">
+	<div id="map">
+	<!--warstwa panelu-->
+		<div class="panel">
+	<!--warstwa nagłówka menu-->
+			<div class="menu" type="button" class="btn btn-primary" > Menu </div>
+	<!--warstwa zawartości menu-->
+				<div class="wrapper">
+				<div class="menu_res">
+					<div id="grodziska_84"><label><input type="checkbox" value="grodziska_84">grodziska</label></div>
+					<div id="legenda1">
+	<!--adres dla legendy: trzeba podać własne nazwy warstw dla argumentu LAYER-->
+						<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=grody:grodziska_84">
+					</div>
+	<!--checkbox do włączania uzytków, tak samo dla pozostałych warstw-->
+					<div id="powiaty_84"><label><input type="checkbox" value="powiaty_84">powiaty</label></div>
+					<div id="legenda2">
+	<!--adres dla legendy-->
+						<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=grody:powiaty_84">
+					</div>
 				</div>
-<!--checkbox do włączania uzytków, tak samo dla pozostałych warstw-->
-				<div id="powiaty_84"><label><input type="checkbox" value="powiaty_84">powiaty</label></div>
-				<div id="legenda2">
-<!--adres dla legendy-->
-					<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=grody:powiaty_84">
-				</div>
-			</div>
+		</div>
 	</div>
+</div>
 <script>
 
 
 
 //definicja obiektu mapy z współrzędnymi dla wybranego obszaru
 var map = L.map('map').setView([52.40, 16.90], 11);
-//dodanie warstwy osm
+//dodanie warstwy mapbox
 
 var
 mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -81,19 +88,18 @@ maxZoom: 18,
 id: 'mapbox.light',
 accessToken:'pk.eyJ1IjoiZ29zaWFrMTAiLCJhIjoiY2puY3ZoN2h0NXNuZTN4bjEzODhveTA4MCJ9.p6Vx-joA-4K-VZTSPOX93w'}).addTo(map);
 
-//dodanie zmiennej adresu geoservera
+//adres geoservera
 var ms_url = "http://localhost:8080/geoserver/wms?";
-//dodanie obiektu własnej warstwy geoserwera
+//dodanie grodziska
 var grodziska = L.tileLayer.wms(ms_url, {
 	layers: 'grody:grodziska_84',
 	format: 'image/png',
-	transparent: true, //przeźroczystość
+	transparent: true,
 	opacity: 0.8
 }).addTo(map);
 
 
 var powiaty = L.tileLayer.wms(ms_url, {
-//tu trzeba podać wg składni workspace:warstwa
 	layers: 'grody:powiaty_84',
 	format: 'image/png',
 	transparent: true,
@@ -117,7 +123,20 @@ $( "#menu_res" ).click(function( event ) {
 			map.addLayer(layerClicked);
 		};
 	});
-
+$(document).ready(function() {
+$('#query').click(function() {
+var setButton = document.getElementById('set');
+ if ($('#query').is(':checked'))
+setButton.addEventListener('click',query);
+else
+setButton.removeEventListener('click',query);
+});
+});
+var clearButton = document.getElementById("clear");
+clearButton.addEventListener('click'
+, function(e) {
+if(map.hasLayer(qlayer))map.removeLayer(qlayer);
+});
 
 //dodanie kontrolki skali mapy
 L.control.scale().addTo(map);

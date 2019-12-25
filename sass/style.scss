@@ -24,6 +24,38 @@ body {
     line-height: 1.7;
     font-family: $font-header;
 }
+/*map*/
+
+#map{
+position: absolute;
+display: block;
+top: 62px;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+.panel{
+position: fixed;
+right: 7px;
+top: 10px;
+}
+
+.menu{
+background-color: black;
+padding: 10px;
+ width: 150px;
+ border: solid 1px #c3c3c3;
+ text-align: center;
+}
+
+.menu_res{
+background-color: white;
+ padding: 10px;
+ width: 150px;
+ border: solid 1px #c3c3c3;
+ display: none;
+}
     
 .container {
     max-width: 1140px;

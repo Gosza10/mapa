@@ -2,7 +2,7 @@
   "name": "taskrunner",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "glowna.html",
   "scripts": {
     "init-project": "npm install && npm-run-all init:*",
     "init:dirs": "mkdirp sass css vendor images js",
