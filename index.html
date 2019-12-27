@@ -6,33 +6,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+
 <!-- MAPBOX -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+
 <!-- AJAX -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>  
 <script src="//rawgit.com/bassjobsen/Bootstrap-3-Typeahead/master/bootstrap3-typeahead.js"></script> 
+
 <!-- LEAFLET -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<link rel='stylesheet prefetch' href='http://mrmufflon.github.io/Leaflet.Coordinates/dist/Leaflet.Coordinates-0.1.3.css'>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src='http://mrmufflon.github.io/Leaflet.Coordinates/dist/Leaflet.Coordinates-0.1.3.min.js'></script>
+
 <!-- SLIDER -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/css/bootstrap-slider.min.css" />
+
 <!-- Ajax-->
 <script src="https://rawgit.com/calvinmetcalf/leaflet-ajax/gh-pages/dist/leaflet.ajax.js"></script>	
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-	<!--Bootstrap-->
+<!--Bootstrap-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script> 
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="css/style.css">
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -52,41 +58,129 @@
 <div class="container">
 	<div id="map">
 	<!--warstwa panelu-->
-		<div class="panel">
+		<div id="panel">
 	<!--warstwa nagłówka menu-->
-			<div class="menu" type="button" class="btn btn-primary" > Menu </div>
+			<div id="menu" class="menu btn btn-primary" > Menu </div>
 	<!--warstwa zawartości menu-->
-				<div class="wrapper">
-				<div class="menu_res">
-					<div id="grodziska_84"><label><input type="checkbox" value="grodziska_84">grodziska</label></div>
-					<div id="legenda1">
-	<!--adres dla legendy: trzeba podać własne nazwy warstw dla argumentu LAYER-->
-						<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=grody:grodziska_84">
-					</div>
-	<!--checkbox do włączania uzytków, tak samo dla pozostałych warstw-->
-					<div id="powiaty_84"><label><input type="checkbox" value="powiaty_84">powiaty</label></div>
-					<div id="legenda2">
-	<!--adres dla legendy-->
-						<img src="http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=grody:powiaty_84">
+				<div id="opakowanie">
+					<div id="przyciski">
+						<button id="obszar" class="obszar btn" title="Wyświetlany powiat"></button> 
+						<button id="ksztalt" class="ksztalt btn" title="Kształt gordziska"><a href="#opakowanie" class="dropdown-toggle" data-toggle="dropdown"></a></button>
 					</div>
 				</div>
 		</div>
 	</div>
+
+	<div id="zasieg"  style="display:none">Wybór wyświetlanego powiatu 
+			<br>
+			
+				<select id="powiat"> 
+					<option value=0>powiat chodzieski</option>
+					<option value=1>powiat czarnkowsko-trzcianecki</option> 
+					<option value=2>powiat gnieźnieński</option> 
+					<option value=3>powiat gostyński</option> 
+					<option value=4>powiat grodziski</option> 
+					<option value=5>powiat jarociński</option> 
+					<option value=6>powiat kaliski</option> 
+					<option value=7>powiat Kalisz</option>
+					<option value=8>powiat kępiński</option>
+					<option value=9>powiat kolski</option>
+					<option value=10>powiat Konin</option>
+					<option value=11>powiat koniński</option>
+					<option value=12>powiat kościański</option>
+					<option value=13>powiat krotoszyński</option>
+					<option value=14>powiat leszczyński</option>
+					<option value=15>powiat Leszno</option>
+					<option value=16>powiat międzychodzki</option>
+					<option value=17>powiat nowotomyski</option>
+					<option value=18>powiat obornicki</option>
+					<option value=19>powiat ostrowski</option>
+					<option value=20>powiat ostrzeszowski</option>
+					<option value=21>powiat pilski</option>
+					<option value=22>powiat pleszewski</option>
+					<option value=23>powiat Poznań</option>
+					<option value=24>powiat poznański</option>
+					<option value=25>powiat rawicki</option>
+					<option value=26>powiat słupecki</option>
+					<option value=27>powiat szamotulski</option>
+					<option value=28>powiat średzki</option>
+					<option value=29>powiat śremski</option>
+					<option value=30>powiat turecki</option>
+					<option value=31>powiat wągrowiecki</option>
+					<option value=32>powiat wolsztyński</option>
+					<option value=33>powiat wrzesiński</option>
+					<option value=34>powiat złotowski</option>
+				</select> 
+				<br>
+				<button id="set2" class="button btn" >przybliż</button> 
+				<button id="clear2" class="button btn">cofnij</button> 
+		
+			</div> 
+
+			<div id="checkbox" style="display:none">Wybór kształtu grodziska
+			
+				<div id="pierscieniowate" class="checkbox"><input type="checkbox" value="pierscieniowate"><label>pierścieniowate</label></div>
+				
+				<div id="stożkowate" class="checkbox"><input type="checkbox" value="stożkowate"><label>stożkowate</label></div>
+				
+				<div id="nieznane" class="checkbox"><input type="checkbox" value="nieznane"><label>nieznane</label></div>
+			
+			</div>
+
 </div>
+
+
 <script>
+
+$(document).ready(function()
+{ 
+	$("#menu").click(function(){ 
+		$("#checkbox").slideUp("fast"); 
+		$("#zasieg").slideUp("fast"); 
+		$("#przyciski").slideToggle("slow"); 
+		
+	}); 
+});	
+
+
+
+
+$("#obszar").click(function()
+{ 
+	 
+		$("#checkbox").slideUp("fast");
+		$("#zasieg").slideToggle("slow"); 
+				
+}); 
+
+
+$("#ksztalt").click(function()
+{ 		
+	$("#zasieg").slideUp("fast");
+	$("#checkbox").slideUp("fast");
+}); 
+
+
+$(document).ready(function()
+{
+    $('.popover-btn').popover();
+});
+
+
+
 
 
 
 //definicja obiektu mapy z współrzędnymi dla wybranego obszaru
-var map = L.map('map').setView([52.40, 16.90], 11);
+//var map = L.map('map').setView([52.40, 16.90], 11);
 //dodanie warstwy mapbox
+//var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+//	maxZoom: 18,
+//	id: 'mapbox.light',
+//	accessToken:'pk.eyJ1IjoiZ29zaWFrMTAiLCJhIjoiY2puY3ZoN2h0NXNuZTN4bjEzODhveTA4MCJ9.p6Vx-joA-4K-VZTSPOX93w'});
 
-var
-mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BYSA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-maxZoom: 18,
-id: 'mapbox.light',
-accessToken:'pk.eyJ1IjoiZ29zaWFrMTAiLCJhIjoiY2puY3ZoN2h0NXNuZTN4bjEzODhveTA4MCJ9.p6Vx-joA-4K-VZTSPOX93w'}).addTo(map);
+
+//mapbox.addTo(map);
 
 //adres geoservera
 var ms_url = "http://localhost:8080/geoserver/wms?";
@@ -107,37 +201,6 @@ var powiaty = L.tileLayer.wms(ms_url, {
 }).addTo(map);
 
 
-
-$(document).ready(function(){
-	$("#menu").click(function(){
-		$("#menu_res").slideToggle("slow");
-	});
-});
-
-$( "#menu_res" ).click(function( event ) {
-	layerClicked = window[event.target.value];
-		if (map.hasLayer(layerClicked)) {
-			map.removeLayer(layerClicked);
-		}
-		else{
-			map.addLayer(layerClicked);
-		};
-	});
-$(document).ready(function() {
-$('#query').click(function() {
-var setButton = document.getElementById('set');
- if ($('#query').is(':checked'))
-setButton.addEventListener('click',query);
-else
-setButton.removeEventListener('click',query);
-});
-});
-var clearButton = document.getElementById("clear");
-clearButton.addEventListener('click'
-, function(e) {
-if(map.hasLayer(qlayer))map.removeLayer(qlayer);
-});
-
 //dodanie kontrolki skali mapy
 L.control.scale().addTo(map);
 //dodanie kontrolki pozycji myszki
@@ -152,25 +215,6 @@ L.control.coordinates({position:"bottomright"}).addTo(map);
 
 
 
-//POPUPY
-
-popup = new L.popup();
-function onMapClick(e) {
-	var BBOX = map.getBounds().toBBoxString();
-	var WIDTH = map.getSize().x;
-	var HEIGHT = map.getSize().y;
-	var X = map.layerPointToContainerPoint(e.layerPoint).x;
-	var Y = map.layerPointToContainerPoint(e.layerPoint).y;
-	var qlayers='grody:grodziska_84';
-	var URL =ms_url+'SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS='+
-		qlayers+'&QUERY_LAYERS='+qlayers+'&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=1&HEIGHT='
-	+HEIGHT+'&WIDTH='+WIDTH+'&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
-popup
-.setLatLng(e.latlng)
-.setContent(e.latlng.toString()+"<iframe src='"+URL+"'width='250' height='120' frameborder='0'></iframe>")
-.openOn(map);
-}
-map.on("click", onMapClick);
 
 </script>
 </body>
