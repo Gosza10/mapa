@@ -19,8 +19,8 @@ $font-text: 'Source Sans Pro', sans-serif;
 
 body {
     margin: 0; 
-    color: $color-two;
-    font-size: 30px;
+    color: $color-dark;
+    font-size: 40px;
     line-height: 1.7;
     font-family: $font-header;
 }
@@ -77,6 +77,23 @@ z-index: 1;
   right: 10px; 
 }
 
+.button
+
+{
+  font-size: 13px;
+  margin: 5px;
+  padding: 5px;
+
+}
+
+#block
+{
+
+  display: block;
+}
+
+
+/* Cztery przyciski w panelu */
 
 #obszar {
   display: inline-block;
@@ -84,38 +101,23 @@ z-index: 1;
   width: 60px;
   height: 60px;
   margin: 10px;
-  background: url("loupe.svg") no-repeat scroll center; 
+  background: url("map.svg") no-repeat scroll center; 
   background-size: 50px 45px; 
 
   }
-#zasieg, #ksztalt_gr
-{
-  position: fixed; 
-  top: 240px; 
-  right: 0;
-  padding: 10px;
-  width: 200px;
-  height: fixed;
+
+#wiek {
+  display: inline-block;
+  text-indent: -9999px;
+  width: 60px;
+  height: 60px;
   margin: 10px;
-  background-color: $color-one;
-  text-align: center;
-  font-size: 20px; 
+  background: url("six.svg") no-repeat scroll center; 
+  background-size: 50px 60px;
+
 }
 
-#powiat {
-  width: 140px;
-  padding: 6px;
-  padding-top: 4px;
-  padding-left: 2px;
-  padding-right: 2px;
-  font-size: 11px;
-  margin-top: 5px;
-  border-radius: 3px; 
-}  
-
-.ksztalt 
-
-{
+#ksztalt {
   display: inline-block;
   text-indent: -9999px;
   width: 60px;
@@ -126,28 +128,57 @@ z-index: 1;
 }
 
 
+#wyszukiwarka {
+  display: inline-block;
+  text-indent: -9999px;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  background: url("search.svg") no-repeat scroll center; 
+  background-size: 50px 60px;
+}
 
 
-#rodzaj
 
-{
-  width: 160px;
+#zasieg, #ksztalt_gr, #wiek_gr, #wyszukaj {
+  position: fixed; 
+  top: 300px; 
+  right: 0;
+  padding: 10px;
+  width: 200px;
+  height: fixed;
+  margin: 10px;
+  background-color: $color-one;
   text-align: center;
-  padding: 3px;
-  margin-top: 5px; 
-  font-size: 12px;
-  border-radius: 3px;
+  font-size: 20px; 
+  color: $color-two;
 }
 
-.button
+#powiat, #wstaw, #rodzaj {
+  width: 140px;
+  padding: 6px;
+  padding-top: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 15px;
+  margin-top: 5px;
+  border-radius: 3px; 
+}  
 
-{
-  font-size: 10px;
-  margin: 5px;
+#chronologia {
   padding: 5px;
-
+  display: column;
+  > input {
+    position: relative;
+    padding: 2px;
+    margin: 10px;
+  }
 }
 
+
+
+
+/*css do glowna.html*/
 /*Navigation*/
 .navigation {
     background: $color-one;
@@ -338,6 +369,10 @@ z-index: 1;
 
 
     
+
+
+
+
 /*Media*/
 
 @media (max-width: 767px) {

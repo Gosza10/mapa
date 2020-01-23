@@ -12,9 +12,10 @@
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
 	
 <!--JQuery  --> 
-		
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+
 		
 <!--Leaflet-->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -46,68 +47,68 @@
             </ul>
         </div>
     </nav>
-<!--warstwa mapy-->
 <div class="container">
 	<div id="map">
-	<!--warstwa panelu-->
 		<div id="panel">
-	<!--warstwa nagłówka menu-->
-			<div id="menu" class="menu btn btn-primary" > Menu </div>
-	<!--warstwa zawartości menu-->
-				<div id="opakowanie">
+			<div id="menu" class="btn btn-primary" > Menu </div>
+				<div id="wrapper">
 					<div id="przyciski">
 						<button id="obszar" class="obszar btn" title="Wyświetlany powiat"></button> 
 						<button id="ksztalt" class="ksztalt btn" title="Kształt grodziska"></button> 
+						<div id="block"></div>
+						<button id="wyszukiwarka" class="wyszukiwarka btn" title="Znajdź grodzisko"><a href="#wrapper" class="dropdown-toggle" data-toggle="dropdown"></a></button> 
+						<button id="wiek" class="wiek btn" title="Wiek grodziska"><a href="#wrapper" class="dropdown-toggle" data-toggle="dropdown"></a></button> 
 					</div>
 				</div>
 		</div>
 	</div>
 
+
 	<div id="zasieg"  style="display:none">Wybór powiatu 
 			<br>
 			
 				<select id="powiat"> 
-					<option value=0>powiat chodzieski</option>
-					<option value=1>powiat czarnkowsko-trzcianecki</option> 
-					<option value=2>powiat gnieźnieński</option> 
-					<option value=3>powiat gostyński</option> 
-					<option value=4>powiat grodziski</option> 
-					<option value=5>powiat jarociński</option> 
-					<option value=6>powiat kaliski</option> 
-					<option value=7>powiat Kalisz</option>
-					<option value=8>powiat kępiński</option>
-					<option value=9>powiat kolski</option>
-					<option value=10>powiat Konin</option>
-					<option value=11>powiat koniński</option>
-					<option value=12>powiat kościański</option>
-					<option value=13>powiat krotoszyński</option>
-					<option value=14>powiat leszczyński</option>
-					<option value=15>powiat Leszno</option>
-					<option value=16>powiat międzychodzki</option>
-					<option value=17>powiat nowotomyski</option>
-					<option value=18>powiat obornicki</option>
-					<option value=19>powiat ostrowski</option>
-					<option value=20>powiat ostrzeszowski</option>
-					<option value=21>powiat pilski</option>
-					<option value=22>powiat pleszewski</option>
-					<option value=23>powiat Poznań</option>
-					<option value=24>powiat poznański</option>
-					<option value=25>powiat rawicki</option>
-					<option value=26>powiat słupecki</option>
-					<option value=27>powiat szamotulski</option>
-					<option value=28>powiat średzki</option>
-					<option value=29>powiat śremski</option>
-					<option value=30>powiat turecki</option>
-					<option value=31>powiat wągrowiecki</option>
-					<option value=32>powiat wolsztyński</option>
-					<option value=33>powiat wrzesiński</option>
-					<option value=34>powiat złotowski</option>
+					<option value="powiat chodzieski">powiat chodzieski</option>
+					<option value="powiat czarnkowsko-trzcianecki">powiat czarnkowsko-trzcianecki</option> 
+					<option value="powiat gnieźnieński">powiat gnieźnieński</option> 
+					<option value="powiat gostyński">powiat gostyński</option> 
+					<option value="powiat grodziski">powiat grodziski</option> 
+					<option value="powiat jarociński">powiat jarociński</option> 
+					<option value="powiat kaliski">powiat kaliski</option> 
+					<option value="powiat Kalisz">powiat Kalisz</option>
+					<option value="powiat kępiński">powiat kępiński</option>
+					<option value="powiat kolski">powiat kolski</option>
+					<option value="powiat Konin">powiat Konin</option>
+					<option value="powiat koniński">powiat koniński</option>
+					<option value="powiat kościański">powiat kościański</option>
+					<option value="powiat krotoszyński">powiat krotoszyński</option>
+					<option value="powiat leszczyński">powiat leszczyński</option>
+					<option value="powiat Leszno">powiat Leszno</option>
+					<option value="powiat międzychodzki">powiat międzychodzki</option>
+					<option value="powiat nowotomyski">powiat nowotomyski</option>
+					<option value="powiat obornicki">powiat obornicki</option>
+					<option value="powiat ostrowski">powiat ostrowski</option>
+					<option value="powiat ostrzeszowski">powiat ostrzeszowski</option>
+					<option value="powiat pilski">powiat pilski</option>
+					<option value="powiat pleszewski">powiat pleszewski</option>
+					<option value="powiat Poznań">powiat Poznań</option>
+					<option value="powiat poznański">powiat poznański</option>
+					<option value="powiat rawicki">powiat rawicki</option>
+					<option value="powiat słupecki">powiat słupecki</option>
+					<option value="powiat szamotulski">powiat szamotulski</option>
+					<option value="powiat średzki">powiat średzki</option>
+					<option value="powiat śremski">powiat śremski</option>
+					<option value="powiat turecki">powiat turecki</option>
+					<option value="powiat wągrowiecki">powiat wągrowiecki</option>
+					<option value="powiat wolsztyński">powiat wolsztyński</option>
+					<option value="powiat wrzesiński">powiat wrzesiński</option>
+					<option value="powiat złotowski">powiat złotowski</option>
 				</select> 
 				<br>
-				<button id="set" class="button btn" >przybliż</button> 
-				<button id="clear" class="button btn">cofnij</button> 
+				<button id="set2" class="button btn" >Przybliż</button> 
+				<button id="clear2" class="button btn">Cofnij</button> 
 		
-			</div> 
+	</div> 
 
 			<div id="ksztalt_gr" style="display:none">Kształt grodziska
 			<br>
@@ -117,23 +118,57 @@
 					<option value="nieznane">nieznane</option> 
 				</select>
 				<br>
-				<button id="set" class="button btn" onclick="przybliz()">przybliż</button> 
-				<button id="clear" class="button btn" onclick="wymaz()">cofnij</button> 
+				<button id="set" class="button btn" onclick="przybliz()">Przybliż</button> 
+				<button id="clear" class="button btn" onclick="wymaz()">Cofnij</button> 
 			
 			</div>
 
+	<div id=wiek_gr style="display:none"> Wybór wieku
+		<div id="chronologia">
+			<input type="checkbox" value="V"><label>V</label>
+			<input type="checkbox" value="VI"><label>VI</label>
+		</div>
+		<div id="chronologia">
+			<input type="checkbox" value="VII"><label>VII</label>
+			<input type="checkbox" value="VIII"><label>VIII</label>
+		</div>
+		<div id="chronologia">
+			<input type="checkbox" value="IX"><label>IX</label>
+			<input type="checkbox" value="X"><label>X</label>
+		</div>
+		<div id="chronologia">
+			<input type="checkbox" value="XI"><label>XI</label>
+			<input type="checkbox" value="XIII"><label>XIII</label>
+		</div>
+		<div id="chronologia">
+			<input type="checkbox" value="XIV"><label>XIV</label>
+			<input type="checkbox" value="XV"><label>XV</label>
+		</div>
+		<div id="chronologia">
+			<input type="checkbox" value="XVI"><label>XVI</label>
+			<input type="checkbox" value="XVII"><label>XVII</label>
+		</div>
+		<button id="search" class="button btn" >Szukaj</button>
+		<button id="clear3" class="button btn">Cofnij</button> 
+	</div>
+	
+	<div id=wyszukaj style="display:none"> Znajdź grodzisko
+		<input type="text" id="wstaw">
+		<button id="search1" class="button btn">Szukaj</button> 
+	</div>
 </div>
 
 
-<script>
-var funkcja_ii;
 
+<script>
 
 $(document).ready(function()
 { 
 	$("#menu").click(function(){ 
 		$("#ksztalt_gr").slideUp("fast"); 
-		$("#zasieg").slideToggle("fast"); 
+		$("#zasieg").slideUp("fast");
+		$("#wiek_gr ").slideUp("fast"); 
+		$("#wyszukaj").slideUp("fast"); 
 		$("#przyciski").slideToggle("slow"); 
 		
 	}); 
@@ -144,7 +179,8 @@ $(document).ready(function()
 
 $("#obszar").click(function()
 { 
-	 
+		$("#wiek_gr ").slideUp("fast"); 
+		$("#wyszukaj").slideUp("fast"); 
 		$("#ksztalt_gr").slideUp("fast");
 		$("#zasieg").slideToggle("slow"); 
 				
@@ -152,36 +188,44 @@ $("#obszar").click(function()
 
 
 $("#ksztalt").click(function()
-{ 		
+{ 	
+	$("#wiek_gr ").slideUp("fast"); 
+	$("#wyszukaj").slideUp("fast"); 	
 	$("#zasieg").slideUp("fast");
 	$("#ksztalt_gr").slideToggle("slow");
 }); 
 
+$("#wyszukiwarka").click(function()
+{ 	
+	$("#wiek_gr ").slideUp("fast"); 
+	$("#wyszukaj").slideToggle("slow"); 	
+	$("#zasieg").slideUp("fast");
+	$("#ksztalt_gr").slideUp("fast");
+}); 
 
-$(document).ready(function()
-{
-    $('.popover-btn').popover();
-});
+$("#wiek").click(function()
+{ 	
+	$("#wiek_gr ").slideToggle("slow"); 
+	$("#wyszukaj").slideUp("fast"); 	
+	$("#zasieg").slideUp("fast");
+	$("#ksztalt_gr").slideUp("fast");
+}); 
 
 
 
 
 //mapa
 var map = L.map('map').setView([52.40, 16.90], 11);
-
 var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	maxZoom: 18,
 	id: 'mapbox.light',
 	accessToken:'pk.eyJ1IjoiZ29zaWFrMTAiLCJhIjoiY2puY3ZoN2h0NXNuZTN4bjEzODhveTA4MCJ9.p6Vx-joA-4K-VZTSPOX93w'});
-
-
 mapbox.addTo(map);
 
 //grodziska
-
 var grody; 
-var gs_url= "http://localhost:8080/geoserver/wms";
 
+var gs_url= "http://localhost:8080/geoserver/wms";
 function grodzisko() {
 	var defaultParam = { 
 		service: 'WFS', 
@@ -195,7 +239,6 @@ function grodzisko() {
 	}; 
 	var parameters = L.Util.extend(defaultParam); 
 	var URL = gs_url + L.Util.getParamString(parameters);
-
 	$.ajax ({ 
 		url : URL,
 		type: 'GET', 
@@ -203,36 +246,45 @@ function grodzisko() {
 		jsonpCallback : 'getJson', 
 		success : function (data) 
 	{ 
+	var ikona = L.icon({
+		iconUrl: 'css/castle1.png',
+		iconSize: [20, 20]
+	});
+
 	grody = L.geoJson(data, { 
-		style: function (feature) { 
-			return { color: "red", weight: 2 };
+		pointToLayer: function (feature, latlng) { 
+			return L.marker(latlng,{icon:ikona});
 		}, 
 		onEachFeature: function (feature, layer){
 			var popup = new L.Popup();
-			popup.setContent("<b>Nazwa</b><ul><li> " + feature.properties.nazwa + "<b>Opis</b><ul><li> " + feature.properties.opis +  "</li><li>Źródło: " + feature.properties.zrodlo + "</li></ul>");
+			popup.setContent(feature.properties.nazwa + "</li><li><b>Opis:</b> " + feature.properties.opis +  "</li><li><b>Wiek:</b> " + feature.properties.informacje + "</li><li><b>Źródło:</b> " + feature.properties.zrodlo + "</li></ul>");
 			layer.bindPopup(popup);
 		}
-	}); 	 
+	});
 		 
 grody.addTo(map); 
+
+
+
 		 
 map.fitBounds(grody.getBounds());
 	}
 	}); 
-
 }
-
 grodzisko();
 
 
-//filtorwanie po ksztalcis grodziska
+
+//filtorwanie po ksztalcie grodziska
+var funkcja_ii;
+
 function przybliz(){
 	if(funkcja_ii == "pierscieniowate"){
 		map.removeLayer(grody);
 		$.ajax ({
 			url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.3.0&typename=grody:pierscieniowate&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
 			type : 'POST',
-			dataType : 'json',
+			dataType : 'json', 
 			jsonpCallback : 'getJson',
 			success : function (data)
 			{
@@ -242,7 +294,7 @@ function przybliz(){
 					},
 					onEachFeature: function(feature, layer){
 						var popup = new L.Popup();
-						popup.setContent("<b>Nazwa</b><ul><li> " + feature.properties.nazwa + "<b>Opis</b><ul><li> " + feature.properties.opis +  "</li><li>Źródło: " + feature.properties.zrodlo + "</li></ul>");
+						popup.setContent(feature.properties.nazwa + "</li><li><b>Opis:</b> " + feature.properties.opis + "</li><li><b>Wiek:</b> " + feature.properties.informacje + "</li><li><b>Źródło:</b> " + feature.properties.zrodlo + "</li></ul>");
 						layer.bindPopup(popup);
 					}
 				}).addTo(map);
@@ -265,7 +317,7 @@ function przybliz(){
 					},
 					onEachFeature: function(feature, layer){
 						var popup = new L.Popup();
-						popup.setContent("<b>Nazwa</b><ul><li> " + feature.properties.nazwa + "<b>Opis</b><ul><li> " + feature.properties.opis +  "</li><li>Źródło: " + feature.properties.zrodlo + "</li></ul>");
+						popup.setContent(feature.properties.nazwa + "</li><li><b>Opis:</b> " + feature.properties.opis +  "</li><li><b>Wiek:</b> " + feature.properties.informacje + "</li><li><b>Źródło:</b> " + feature.properties.zrodlo + "</li></ul>");
 						layer.bindPopup(popup);
 					}
 				}).addTo(map);
@@ -288,7 +340,7 @@ function przybliz(){
 					},
 					onEachFeature: function(feature, layer){
 						var popup = new L.Popup();
-						popup.setContent("<b>Nazwa</b><ul><li> " + feature.properties.nazwa + "<b>Opis</b><ul><li> " + feature.properties.opis +  "</li><li>Źródło: " + feature.properties.zrodlo + "</li></ul>");
+						popup.setContent(feature.properties.nazwa + "</li><li><b>Opis:</b> " + feature.properties.opis + "</li><li><b>Wiek:</b> " + feature.properties.informacje + "</li><li><b>Źródło:</b> " + feature.properties.zrodlo + "</li></ul>");
 						layer.bindPopup(popup);
 					}
 				}).addTo(map);
@@ -299,20 +351,16 @@ function przybliz(){
 	else{
 		console.log('brak danych')
 	}
-
 }
-
-
 function wymaz(){
 	location.reload();
 }
 
 
 
-
+//wszystkie powiaty
 var powiat;
 function powiaty() {
-
 	$.ajax ({
 		url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.3.0&typename=grody:powiaty_84&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
 		type : 'GET',
@@ -322,7 +370,7 @@ function powiaty() {
 		{
 			powiat = L.geoJson(data, {
 				style: function(feature) {
-					return {color: "red", weight: 2};
+					return {color: 'black', fillColor: 'transparent', weight: 2};
 				},
 				onEachFeature: function(feature, layer){
 				}
@@ -332,21 +380,198 @@ function powiaty() {
 	})
 }
 
+powiaty();
+
+//filtrowanie po powiatach
+
+var powiaty_84;
+
+function zasieg(){
+	if(map.hasLayer(powiaty_84))map.removeLayer(powiaty_84);
+	nazwa=$("#powiat").val();  
+
+	var viewparams = ['nazwa:' + nazwa];
+	var defaultParam = {
+		service: 'WFS',
+		version: '1.3.0',
+		request: 'GetFeature',
+		typeName: ' grody:powiaty',
+		maxFeatures: 1000,
+		outputFormat: 'json',
+		format_options: 'callback:getJson',
+		srsName: 'epsg:4326',
+		viewparams:  viewparams.join(';')
+	};
+var parameters = L.Util.extend(defaultParam);
+var URL = gs_url + L.Util.getParamString(parameters);
+
+$.ajax({
+	url : URL,
+	type: 'GET',
+	dataType : 'json',
+	jsonpCallback : 'getJson',
+	success : function (data) {
+		powiaty_84 = L.geoJson(data, {
+			style: function (feature) {
+				return {
+					color: 'black',
+					fillColor: 'transparent',
+					weight: 1
+		};},
+		onEachFeature: function (feature, layer) {
+			map.fitBounds(layer.getBounds()); 
+		}
+
+	});
+	powiaty_84.addTo(map);
+}});
+}
+
+zasieg();
+
+
+
+var setButton2 = document.getElementById('set2'); 
+setButton2.addEventListener('click', zasieg);
+
+
+function czysc2(d)
+{
+	if(map.hasLayer(powiaty_84))map.removeLayer(powiaty_84);
+	map.fitBounds(powiat.getBounds());
+	
+}
+
+var clearButton2 = document.getElementById('clear2'); 
+clearButton2.addEventListener('click', czysc2);
+
+
+
+
+
+//wiek
+
+// funkcja resetująca  filtrowanie po feature 
+function setFeaturesVisible() {
+	for(let key in grody._layers) {
+		const feature = grody._layers[key]._layers
+			for(let key2 in feature) {
+			feature[key2].setOpacity(1) //nieprzezroczyste
+			}
+	}
+}
+
+var clearButton3 = document.getElementById('clear3'); 
+clearButton3.addEventListener('click', setFeaturesVisible);
+
+
+function getCheckedCheckboxes() {
+	const checkedBoxes = []
+	$("input:checkbox[type=checkbox]:checked").each(function(){ //wybieramy zaznaczone checkboxy
+    checkedBoxes.push($(this).val());
+});
+	return checkedBoxes
+}
+
+function filterByAges(checkedBoxes) {
+	for(let key in grody._layers) {
+		const feature = grody._layers[key]
+		console.log(feature)
+		const wieki = feature.feature.properties.informacje
+		const wiekiArray = wieki.split(' ') // string wieki na tablice
+var hasCommonAges = wiekiArray.filter(function(e) { // zwraca liste wspólnych wieków
+  return checkedBoxes.indexOf(e) > -1;
+})
+		if(hasCommonAges.length === 0) {
+			for(let key2 in feature._layers) {
+			feature._layers[key2].setOpacity(0) // przezroczyste
+			}
+		}
+	}
+}
+
+var setButton3 = document.getElementById('search'); 
+setButton3.addEventListener('click', () => {
+	setFeaturesVisible()
+	const checkedBoxes = getCheckedCheckboxes()
+	if(checkedBoxes.length) {
+	filterByAges(checkedBoxes)
+	}
+});
 
 
 
 
 
 
+/*
+//wyszukiwarka
+
+var wyszukaj;
+
+function wyszukiwarka(){
+	if(map.hasLayer(wyszukaj))map.removeLayer(wyszukaj);
+	nazwa=$("#wyszukiwarka").val();  
+
+	var viewparams = ['nazwa:' + nazwa];
+	var defaultParam = {
+		service: 'WFS',
+		version: '1.3.0',
+		request: 'GetFeature',
+		typeName: ' grody:wyszukiwarka',
+		maxFeatures: 1000,
+		outputFormat: 'json',
+		format_options: 'callback:getJson',
+		srsName: 'epsg:4326',
+		viewparams:  viewparams.join(';')
+	};
+var parameters = L.Util.extend(defaultParam);
+var URL = gs_url + L.Util.getParamString(parameters);
+
+$.ajax({
+	url : URL,
+	type: 'GET',
+	dataType : 'json',
+	jsonpCallback : 'getJson',
+	success : function (data) {
+		wyszukaj = L.geoJson(data, {
+			style: function (feature) {
+				return {
+					color: 'black',
+					fillColor: 'transparent',
+					weight: 1
+		};},
+		onEachFeature: function (feature, layer) {
+			map.fitBounds(layer.getBounds()); 
+		}
+
+	});
+	wyszukaj.addTo(map);
+}});
+}
+
+wyszukiwarka();
+
+var setButton3 = document.getElementById('search1'); 
+setButton3.addEventListener('click', wyszukiwarka);
+
+
+$( function() {
+    $( "#wstaw" ).autocomplete({
+      source: 'php/index.php'
+    });
+});	
+
+
+*/
 //dodanie kontrolki skali mapy
 L.control.scale().addTo(map);
 //dodanie kontrolki pozycji myszki
 L.control.coordinates({position:"bottomright"}).addTo(map);
-
-
 function updatevariable(data) {
 	funkcja_ii = data;
 }
+
 
 </script>
 </body>
