@@ -135,9 +135,10 @@
 		<div id="chronologia">
 			<input type="checkbox" value="IX"><label>IX</label>
 			<input type="checkbox" value="X"><label>X</label>
+			<input type="checkbox" value="XI"><label>XI</label>
 		</div>
 		<div id="chronologia">
-			<input type="checkbox" value="XI"><label>XI</label>
+			<input type="checkbox" value="XII"><label>XII</label>
 			<input type="checkbox" value="XIII"><label>XIII</label>
 		</div>
 		<div id="chronologia">
@@ -153,7 +154,7 @@
 	</div>
 	
 	<div id=wyszukaj style="display:none"> Znajdź grodzisko
-		<input type="text" id="wstaw">
+		<input type="search" id="wstaw">
 		<button id="search1" class="button btn">Szukaj</button> 
 	</div>
 </div>
@@ -222,10 +223,18 @@ var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?a
 	accessToken:'pk.eyJ1IjoiZ29zaWFrMTAiLCJhIjoiY2puY3ZoN2h0NXNuZTN4bjEzODhveTA4MCJ9.p6Vx-joA-4K-VZTSPOX93w'});
 mapbox.addTo(map);
 
+
+//ikona do grodziska
+
+let ikona = L.icon({
+	iconUrl: 'css/castle1.png',
+	iconSize: [20, 20]
+});
+
 //grodziska
 var grody; 
 
-var gs_url= "http://localhost:8080/geoserver/wms";
+let gs_url= "http://localhost:8080/geoserver/wms";
 function grodzisko() {
 	var defaultParam = { 
 		service: 'WFS', 
@@ -246,10 +255,7 @@ function grodzisko() {
 		jsonpCallback : 'getJson', 
 		success : function (data) 
 	{ 
-	var ikona = L.icon({
-		iconUrl: 'css/castle1.png',
-		iconSize: [20, 20]
-	});
+
 
 	grody = L.geoJson(data, { 
 		pointToLayer: function (feature, latlng) { 
@@ -382,6 +388,8 @@ function powiaty() {
 
 powiaty();
 
+
+
 //filtrowanie po powiatach
 
 var powiaty_84;
@@ -504,43 +512,34 @@ setButton3.addEventListener('click', () => {
 
 
 
-/*
+
 //wyszukiwarka
-
-var wyszukaj;
-
-function wyszukiwarka(){
-	if(map.hasLayer(wyszukaj))map.removeLayer(wyszukaj);
-	nazwa=$("#wyszukiwarka").val();  
-
-	var viewparams = ['nazwa:' + nazwa];
-	var defaultParam = {
-		service: 'WFS',
-		version: '1.3.0',
-		request: 'GetFeature',
-		typeName: ' grody:wyszukiwarka',
-		maxFeatures: 1000,
-		outputFormat: 'json',
-		format_options: 'callback:getJson',
-		srsName: 'epsg:4326',
-		viewparams:  viewparams.join(';')
-	};
+function wyszukiwarka() {
+var gs_url= "http://localhost:8080/geoserver/wms";
+var viewparams = ['nazwa:' + document.getElementById("wstaw").value];
+var defaultParam = {
+	service: 'WFS',
+	version: '1.3.0',
+	request: 'GetFeature',
+	typeName: ' grody:wyszukiwarka',
+	maxFeatures: 1000,
+	outputFormat: 'json',
+	format_options: 'callback:getJson',
+	srsName: 'epsg:4326',
+	viewparams:  viewparams.join(';')
+};
 var parameters = L.Util.extend(defaultParam);
 var URL = gs_url + L.Util.getParamString(parameters);
 
 $.ajax({
 	url : URL,
-	type: 'GET',
+	type: 'POST',
 	dataType : 'json',
-	jsonpCallback : 'getJson',
-	success : function (data) {
-		wyszukaj = L.geoJson(data, {
-			style: function (feature) {
-				return {
-					color: 'black',
-					fillColor: 'transparent',
-					weight: 1
-		};},
+	success : function (response) {
+		wyszukaj = L.geoJson(response, { 
+		pointToLayer: function (feature, latlng) { 
+			return L.marker(latlng,{icon:ikona});
+		}, 
 		onEachFeature: function (feature, layer) {
 			map.fitBounds(layer.getBounds()); 
 		}
@@ -549,6 +548,8 @@ $.ajax({
 	wyszukaj.addTo(map);
 }});
 }
+
+
 
 wyszukiwarka();
 
@@ -563,7 +564,6 @@ $( function() {
 });	
 
 
-*/
 //dodanie kontrolki skali mapy
 L.control.scale().addTo(map);
 //dodanie kontrolki pozycji myszki
