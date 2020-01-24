@@ -81,12 +81,17 @@ body { margin: 0; color: #444; font-size: 40px; line-height: 1.7; font-family: "
 
 .list-horizontal li { display: inline-block; }
 
+/* Authors */
+.authors li { margin-bottom: 12px; }
+
 /* Post */
 .post { display: none; }
 
 .post.active { display: block; }
 
-.post-tags { display: -ms-flexbox; display: flex; padding: 0; }
+.post-author { font-style: italic; }
+
+.post-tags { display: -ms-flexbox; display: flex; padding: 10px; }
 
 .post-tags p { margin: 0 10px 0 0; }
 
