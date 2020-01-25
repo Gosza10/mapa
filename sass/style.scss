@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Source+Sans+Pro:300&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300i|Noto+Sans+KR|Titillium+Web&display=swap" 
+    rel="stylesheet');
 
 /* Variables */
 
@@ -8,8 +9,9 @@ $color-light: #fff;
 $color-dark: #444;
 
 
-$font-header: 'Oswald', sans-serif;
-$font-text: 'Source Sans Pro', sans-serif;
+$font-logo: 'Fira Sans', sans-serif;
+$font-text: 'Titillium Web', sans-serif;
+$font-header: 'Noto Sans KR', sans-serif;
 
 /* Global */
 
@@ -30,6 +32,15 @@ body {
     margin: 0 auto;
     padding: 0;
 }
+
+.splash {
+    height: 100vh;
+    position: relative;
+    background-image: url(https://i.postimg.cc/wx4SVk5h/artsy-back-view-neon-lights-2289895.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    }
 
 /*map*/
 
@@ -56,6 +67,7 @@ z-index: 1;
  width: 210px;
  border: solid 1px;
  text-align: center;
+ font-family: $font-text;
 }
 
 
@@ -66,6 +78,7 @@ z-index: 1;
   height: 180px;
   position: fixed;
   right: 10px; 
+
 }
 
 .button
@@ -74,7 +87,7 @@ z-index: 1;
   font-size: 13px;
   margin: 5px;
   padding: 5px;
-
+  font-family: $font-text;
 }
 
 #block
@@ -168,6 +181,134 @@ z-index: 1;
 
 
 
+
+
+/*Navigation*/
+.navigation {
+    background: $color-one;
+    padding: 12px 0;
+    display: block;
+    font-family: $font-header;
+    font-size: 25px;
+    text-align: left;
+        
+    ul {
+        padding: 0;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+  }
+
+  .iteam {
+        display: inline-block;
+        margin: 0 36px 0 0;
+        position: relative;
+
+        > a {
+            text-decoration: none;
+            color: $color-two;
+        }
+    }
+}
+
+/*css do glowna.html*/
+
+/* Slider */
+
+.carousel-inner, .carousel-item {
+  height: 100vh;
+}
+
+.carousel-item img {
+  height: 100%;
+  object-fit: cover;
+}
+.card-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+
+
+.card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+
+
+
+
+.section-title {
+  font-size: 22px;
+  text-transform: uppercase;
+  font-family: $font-header;
+  font-weight: 600;
+  span {
+    text-transform: none;
+    font-weight: 400;
+    color: lighten($color-dark, 20%);
+  }
+}
+
+/* Layout */
+
+.wrapper {
+  display: flex;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.sidebar {
+  flex: 1 0 0;
+}
+
+.posts {
+  flex: 2 0 0;
+}
+
+.sidebar, .posts {
+  background: $color-light;
+  margin: 30px 0 0 20px;
+  padding: 50px;
+  border: 1px solid $color-dark;
+  border-radius: 5px;
+}
+
+/* Logo */
+
+.logo {
+  font-family: $font-header;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 1;
+  text-align: center;
+  margin: 40px;
+  padding-bottom: 30px;
+}
+
+/* Lists */
+
+.list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  .active {
+    font-weight: bold;
+  }
+}
+
+/* Post */
+
+.post {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
 
 
 /*Media*/

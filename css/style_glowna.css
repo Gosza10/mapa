@@ -21,60 +21,35 @@ body { margin: 0; color: #444; font-size: 40px; line-height: 1.7; font-family: "
 /* Slider */
 .carousel-inner, .carousel-item { height: 100vh; }
 
-.carousel-item img { height: 100%; object-fit: cover; }
+.carousel-item img { height: 100%; -o-object-fit: cover; object-fit: cover; }
 
-.card-image img { width: 100%; height: 300px; object-fit: cover; }
+.card-image img { width: 100%; height: 300px; -o-object-fit: cover; object-fit: cover; }
 
-.card img { width: 100%; height: 400px; object-fit: cover; }
+.card img { width: 100%; height: 400px; -o-object-fit: cover; object-fit: cover; }
 
 .section-title { font-size: 22px; text-transform: uppercase; font-family: "Oswald", sans-serif; font-weight: 600; }
 
 .section-title span { text-transform: none; font-weight: 400; color: #777777; }
 
 /* Layout */
-.wrapper { display: flex; margin-left: 10px; margin-bottom: 10px; }
+.wrapper { display: -ms-flexbox; display: flex; margin-left: 10px; margin-bottom: 10px; }
 
-.sidebar { flex: 1 0 0; }
+.sidebar { -ms-flex: 1 0 0px; flex: 1 0 0; }
 
-.posts { flex: 2 0 0; }
+.posts { margin: 20px; -ms-flex: 2 0 0px; flex: 2 0 0; }
 
-.sidebar, .posts { background: #fff; margin-right: 10px; padding: 50px; border: 1px solid #444; border-radius: 5px; }
+.sidebar, .posts { background: #fff; margin: 30px 0 0 20px; padding: 50px; border: 1px solid #444; border-radius: 5px; }
 
 /* Logo */
 .logo { font-family: "Oswald", sans-serif; font-weight: 400; font-size: 80px; line-height: 1; text-align: center; margin: 30px; padding-bottom: 30px; }
-
-/* Lists */
-.list { list-style-type: none; margin: 0; padding: 0; }
-
-.list .active { font-weight: bold; }
-
-.list-horizontal li { display: inline-block; }
 
 /* Post */
 .post { display: none; }
 
 .post.active { display: block; }
 
-.post-tags { display: flex; padding: 0; }
-
-.post-tags p { margin: 0 10px 0 0; }
-
-.post-tags li { padding: 2px; margin: 2px; }
-
-.tags { text-align: center; padding: 5px; }
-
-.tags li { display: inline-block; margin: auto 4px; }
-
-.tag-size-1 { font-size: 16px; }
-
-.tag-size-2 { font-size: 18px; }
-
-.tag-size-3 { font-size: 24px; }
-
-.tag-size-4 { font-size: 26px; }
-
-.tag-size-5 { font-size: 30px; }
+.post li { padding: 2px; margin: 2px; }
 
 /*Media*/
-@media (max-width: 767px) { .main-box .footer { flex-direction: column; }
+@media (max-width: 767px) { .main-box .footer { -ms-flex-direction: column; flex-direction: column; }
   .box-work { max-width: 100%; height: 150px; position: relative; } }

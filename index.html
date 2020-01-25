@@ -198,7 +198,7 @@ $('#wiek').click(function()
 }); 
 
 //mapa
-var map = L.map('map').setView([52.40, 16.90], 12);
+var map = L.map('map').setView([52.40, 16.90], 10);
 var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
   maxZoom: 18,
   id: 'mapbox.light',
@@ -206,7 +206,7 @@ var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?a
 mapbox.addTo(map);
 
 
-//ikona do grodziska
+//ikona dla grodziska
 
 let ikona = L.icon({
   iconUrl: 'css/castle1.png',
@@ -255,7 +255,7 @@ function grodzisko() {
 
 
 		 
-      map.fitBounds(grody.getBounds());
+      //map.fitBounds(grody.getBounds());
     }
   }); 
 }
@@ -264,7 +264,7 @@ grodzisko();
 
 
 //filtorwanie po ksztalcie grodziska
-var funkcja_ii;
+let funkcja_ii;
 
 function przybliz(){
   if(funkcja_ii == 'pierscieniowate'){
@@ -340,6 +340,8 @@ function przybliz(){
     console.log('brak danych');
   }
 }
+
+
 function wymaz(){
   location.reload();
 }
@@ -363,15 +365,12 @@ function powiaty() {
         onEachFeature: function(feature, layer){
         }
       }).addTo(map);
-      map.fitBounds(powiat);
+      //map.fitBounds(powiat);
     }
   });
 }
 
 powiaty();
-
-// select * from grodziska.powiatuy where nazwa LIKE ''
-
 
 //filtrowanie po powiatach
 
@@ -426,15 +425,8 @@ var setButton2 = document.getElementById('set2');
 setButton2.addEventListener('click', zasieg);
 
 
-function czysc2(d)
-{
-  if(map.hasLayer(powiaty_84))map.removeLayer(powiaty_84);
-  map.fitBounds(powiat.getBounds());
-	
-}
-
 var clearButton2 = document.getElementById('clear2'); 
-clearButton2.addEventListener('click', czysc2);
+clearButton2.addEventListener('click', wymaz);
 
 
 
@@ -556,7 +548,7 @@ function czysc3(d)
 }
 
 var clearButton3 = document.getElementById('clear4'); 
-clearButton3.addEventListener('click', czysc3);
+clearButton3.addEventListener('click', wymaz);
 
 
 
