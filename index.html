@@ -12,10 +12,12 @@
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
   	
   <!--JQuery  --> 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  
   <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
-
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+  
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   		
   <!--Leaflet-->
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -30,24 +32,27 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script> 
 
   <link rel="stylesheet" href="css/style.css">
-  </head>
+</head>
   <body>
   	<nav class="navigation">
-          <div class="container">
-          	<ul>
-                  <li class="iteam">
-          	        <a href="glowna.html">Strona Główna</a>
-                  </li>
-                  <li class="iteam">
-                  	<a href="index.html">Mapa</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
+        <div class="container">
+          <ul>
+            <li class="iteam">
+              <a class="logo" href="#">INTERAKTYWNA MAPA WCZESNOŚREDNIOWIECZNYCH GRODZISK WIELKOPOLSKI</a>
+            </li>
+            <li class="iteam">
+              <a class="nav-link" href="glowna.html">STRONA GŁÓWNA</a>
+            </li>
+            <li class="iteam">
+              <a class="nav-link" href="index.html">MAPA</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
   <div class="container">
   	<div id="map">
   		<div id="panel">
-  			<div id="menu" class="btn btn-primary" > Menu </div>
+  			<div id="menu" class="btn btn-primary" > MENU </div>
   				<div id="wrapper">
   					<div id="przyciski">
   						<button id="obszar" class="obszar btn" title="Wyświetlany powiat"></button> 
@@ -110,8 +115,8 @@
   				<option value="nieznane">nieznane</option> 
   			</select>
   		<br>
-  			<button id="set" class="button btn" onclick="przybliz()">Przybliż</button> 
-  			<button id="clear" class="button btn" onclick="wymaz()">Cofnij</button> 
+  			<button id="set" class="button btn">Przybliż</button> 
+  			<button id="clear" class="button btn">Cofnij</button> 
   	</div>
   	
   	<div id=wiek_gr style="display:none"> Wybór wieku
@@ -152,7 +157,9 @@
   </div>
   <script>
 
-  $(document).ready(function()
+// funkcje rozwijające i zwijające menu oraz poszczególne przyciski
+
+  $(function()
   { 
     $('#menu').click(function(){ 
       $('#ksztalt_gr').slideUp('fast'); 
@@ -197,7 +204,8 @@
     $('#ksztalt_gr').slideUp('fast');
   }); 
 
-  //mapa
+  /*wczytanie mapt za pomocą biblioteki Leaflet z mapboxa
+  za pomocą setView ustawia sie domyslny widok*/
   var map = L.map('map').setView([52.40, 16.90], 10);
   var mapbox = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
@@ -207,20 +215,21 @@
 
 
   //ikona dla grodziska
-
   let ikona = L.icon({
     iconUrl: 'css/castle1.png',
     iconSize: [20, 20]
   });
 
-  //grodziska
+  /*funkcja tworząca geoJSON z grodziskami
+  na poczatku ustalenie parametrów dla linku WFS,*/
   var grody; 
 
-  let gs_url= 'http://localhost:8080/geoserver/wms';
+  let gs_url= 'http://localhost:8080/geoserver/wfs'; 
   function grodzisko() {
+    //tworzenie parametrow dla linka WFS
     var defaultParam = { 
       service: 'WFS', 
-      version: '1.3.0', 
+      version: '1.1.0', 
       request: 'GetFeature', 
       typeName: 'grody:grodziska_84', 
       maxFeatures: 1000, 
@@ -230,6 +239,8 @@
     }; 
     var parameters = L.Util.extend(defaultParam); 
     var URL = gs_url + L.Util.getParamString(parameters);
+
+    //stworzenie geoJSONA za pomoca  Ajax oraz blibiotek: jQuery oraz leaflet
     $.ajax ({ 
       url : URL,
       type: 'GET', 
@@ -237,40 +248,40 @@
       jsonpCallback : 'getJson', 
       success : function (data) 
       { 
-
-
         grody = L.geoJson(data, { 
           pointToLayer: function (feature, latlng) { 
-            return L.marker(latlng,{icon:ikona});
+            return L.marker(latlng,{icon:ikona});  //zamiana stylu domyslnego na ikony
           }, 
           onEachFeature: function (feature, layer){
+            //popup z wybranymi elementami ktore ma zawierac
             var popup = new L.Popup();
-            popup.setContent(feature.properties.nazwa + '</li><li><b>Opis:</b> ' + feature.properties.opis +  '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii +  '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li></ul>');
+            popup.setContent(feature.properties.nazwa + '<li><b>Opis:</b> ' + feature.properties.opis +  '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii +  '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li>');
             layer.bindPopup(popup);
           }
         });
-  		 
+  		 // dodanie do mapy grodow
         grody.addTo(map); 
-
-
-
-  		 
-        //map.fitBounds(grody.getBounds());
       }
     }); 
   }
-  grodzisko();
+  grodzisko(); //wywolanie funkcji
 
 
 
-  //filtorwanie po ksztalcie grodziska
-  let funkcja_ii;
+  /*filtorwanie wedlug kształtu grodziska, 
+  jeśli warunek jest spełniony to tworzy geoJSON z wybranym kształtem. 
+  Dla każdego kształtu stworzono osobny widok w Geoserverze.
+  Schemat tworzenia jest taki sam jak dla grodzisk. Tylko od razu zdefiniowano link do WFS.
+  funkcja_ii jest to kolumna w bazie danych przechowujaca kształt
+   */
+  
+  let funkcja_ii; 
 
   function przybliz(){
     if(funkcja_ii == 'pierscieniowate'){
       map.removeLayer(grody);
       $.ajax ({
-        url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.3.0&typename=grody:pierscieniowate&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
+        url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.1.0&typename=grody:pierscieniowate&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
         type : 'POST',
         dataType : 'json', 
         jsonpCallback : 'getJson',
@@ -282,18 +293,18 @@
             }, 
             onEachFeature: function(feature, layer){
               var popup = new L.Popup();
-              popup.setContent(feature.properties.nazwa + '</li><li><b>Opis:</b> ' + feature.properties.opis + '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii + '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li></ul>');
+              popup.setContent(feature.properties.nazwa + '<li><b>Opis:</b> ' + feature.properties.opis + '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii + '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li>');
               layer.bindPopup(popup);
             }
           }).addTo(map);
-          map.fitBounds(grody);
+          map.fitBounds(grody); //fitBounds przybliża do obszaru
         }
       });
     }
     else if(funkcja_ii == 'stozkowate'){
       map.removeLayer(grody);
       $.ajax ({
-        url : 'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.3.0&typename=grody:stozkowate&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
+        url : 'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.1.0&typename=grody:stozkowate&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
         type : 'POST',
         dataType : 'json',
         jsonpCallback : 'getJson',
@@ -305,7 +316,7 @@
             }, 
             onEachFeature: function(feature, layer){
               var popup = new L.Popup();
-              popup.setContent(feature.properties.nazwa + '</li><li><b>Opis:</b> ' + feature.properties.opis +  '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii +  '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li></ul>');
+              popup.setContent(feature.properties.nazwa + '<li><b>Opis:</b> ' + feature.properties.opis +  '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii +  '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li>');
               layer.bindPopup(popup);
             }
           }).addTo(map);
@@ -316,8 +327,8 @@
     else if(funkcja_ii == 'nieznane'){
       map.removeLayer(grody);
       $.ajax ({
-        url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.3.0&typename=grody:nieznane&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
-        type : 'GET',
+        url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.1.0&typename=grody:nieznane&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
+        type : 'POST',
         dataType : 'json',
         jsonpCallback : 'getJson',
         success : function (data)
@@ -328,7 +339,7 @@
             }, 
             onEachFeature: function(feature, layer){
               var popup = new L.Popup();
-              popup.setContent(feature.properties.nazwa + '</li><li><b>Opis:</b> ' + feature.properties.opis + '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii + '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li></ul>');
+              popup.setContent(feature.properties.nazwa + '<li><b>Opis:</b> ' + feature.properties.opis + '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Kształt:</b> ' + feature.properties.funkcja_ii + '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li>');
               layer.bindPopup(popup);
             }
           }).addTo(map);
@@ -342,38 +353,50 @@
   }
 
 
+//funkcja, która umożliwia powrót do domyślnego widoku
   function wymaz(){
     location.reload();
   }
 
+//dodanie funkcji przybliż do przycisku 
+  var setButton2 = document.getElementById('set'); 
+  setButton2.addEventListener('click', przybliz);
 
+//cofniecie do domyślengo widoku
+  var clearButton2 = document.getElementById('clear'); 
+  clearButton2.addEventListener('click', wymaz);
 
-  //wszystkie powiaty
+//funkcja aktualizująca wartości na podstawie wyboru listy*/
+  function updatevariable(data) {
+    funkcja_ii = data;
+  }
+
+//wszystkie powiaty
   var powiat;
   function powiaty() {
-    $.ajax ({
-      url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.3.0&typename=grody:powiaty_84&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
-      type : 'GET',
-      dataType : 'json',
-      jsonpCallback : 'getJson',
-      success : function (data)
-      {
-        powiat = L.geoJson(data, {
-          style: function(feature) {
-            return {color: 'black', fillColor: 'transparent', weight: 2};
-          },
-          onEachFeature: function(feature, layer){
-          }
-        }).addTo(map);
-        //map.fitBounds(powiat);
-      }
-    });
-  }
+  $.ajax ({
+    url :'http://localhost:8080/geoserver/grody/wfs?service=WFS&version=1.1.0&typename=grody:powiaty_84&request=GetFeature&typeNames=featuretype&outputFormat=application/json',
+    type : 'GET',
+    dataType : 'json',
+    jsonpCallback : 'getJson',
+    success : function (data)
+    {
+      powiat = L.geoJson(data, {
+        style: function(feature) {
+          return {color: 'black', fillColor: 'transparent', weight: 2};
+        }
+      }).addTo(map);
+
+    }
+  });
+}
 
   powiaty();
 
-  //filtrowanie po powiatach
+  //filtrowanie wedlug powiatu
 
+  /*powiaty pobrano z obiektu "powiat"(utoworzono widok o takiej nazwie w Geoserverze), 
+  val() wstawia wartość taka jaka jest w bazie danych*/
   var powiaty_84;
 
   function zasieg(){
@@ -383,7 +406,7 @@
     var viewparams = ['nazwa:' + nazwa];
     var defaultParam = {
       service: 'WFS',
-      version: '1.3.0',
+      version: '1.1.0',
       request: 'GetFeature',
       typeName: ' grody:powiaty',
       maxFeatures: 1000,
@@ -419,84 +442,81 @@
   }
 
 
-//dodanie 
+//dodanie funkcji zasieg do zdarzenia click
   var setButton2 = document.getElementById('set2'); 
   setButton2.addEventListener('click', zasieg);
 
-
+//cofniecie do domyslengo widoku
   var clearButton2 = document.getElementById('clear2'); 
   clearButton2.addEventListener('click', wymaz);
 
 
 
-
-
-  //wiek
+  //filtrowanie wedlug wieku
 
   // funkcja resetująca  filtrowanie po feature 
+  //_layers lista okiektow w warstwie
   function setFeaturesVisible() {
-    for(let key in grody._layers) {
-      const feature = grody._layers[key]._layers;
+    for(let key in grody._layers) { //iteracja po warstwach 
+      const feature = grody._layers[key]._layers; // uzyskanie dostepu do feature
+      console.log(feature, 'feature');
       for(let key2 in feature) {
-        feature[key2].setOpacity(1); //nieprzezroczyste
+        feature[key2].setOpacity(1); // ustawienie nieprzezroczystosci,widocznoscis
       }
     }
   }
 
+  //po nacisnieciu przycisku wszystkie punkty są widoczne
   var clearButton3 = document.getElementById('clear3'); 
   clearButton3.addEventListener('click', setFeaturesVisible);
 
 
+//wybiera zaznaczone checkboxy
   function getCheckedCheckboxes() {
     const checkedBoxes = [];
-    $('input:checkbox[type=checkbox]:checked').each(function(){ //wybieramy zaznaczone checkboxy
-      checkedBoxes.push($(this).val());
+    $('input:checkbox[type=checkbox]:checked').each(function(){
+      checkedBoxes.push($(this).val()); //dodanie do tablicy zaznaczonego wieku
     });
-    return checkedBoxes;
+    return checkedBoxes;  //zwraca tablice z wartościami
   }
 
+/*funkcja filtrujaca według wieku*/
   function filterByAges(checkedBoxes) {
-    for(let key in grody._layers) {
-      const feature = grody._layers[key];
+    for(let key in grody._layers) { //iteracja po liście obiektow w warstwie 
+      const feature = grody._layers[key]; //uzyskanie pojedynczego obiektu w warstwie grody poprzez indeks [key]
       console.log(feature);
-      const wieki = feature.feature.properties.informacje;
-      const wiekiArray = wieki.split(' '); // string wieki na tablice
-      var hasCommonAges = wiekiArray.filter(function(e) { // zwraca liste wspólnych wieków
-        return checkedBoxes.indexOf(e) > -1;
+      const wieki = feature.feature.properties.informacje; //uzyskanie dostepu  do wieku, który znajduje sie w kolumnie informacje
+      const wiekiArray = wieki.split(' '); // napisy na tablice
+      var hasCommonAges = wiekiArray.filter(function(e) { 
+        return checkedBoxes.indexOf(e) > -1; // zwraca liste wspólnych wieków
       });
-      if(hasCommonAges.length === 0) {
+      if(hasCommonAges.length === 0) { 
         for(let key2 in feature._layers) {
-          feature._layers[key2].setOpacity(0); // przezroczyste
+          feature._layers[key2].setOpacity(0); //ustawia przezroczystość dla grodów, które nie zawierają zaznaczonego wieku
         }
       }
     }
   }
 
+
+/*połączenie funkcji z przyciskiem 'szukaj' za pomoca id search */
   var setButton3 = document.getElementById('search'); 
   setButton3.addEventListener('click', () => {
     setFeaturesVisible();
-    const checkedBoxes = getCheckedCheckboxes();
-    if(checkedBoxes.length) {
-      filterByAges(checkedBoxes);
+    const checkedBoxes = getCheckedCheckboxes(); //do zmiennej przypisane są wybrane wieki
+    if(checkedBoxes.length) { 
+      filterByAges(checkedBoxes); 
     }
   });
 
-  /*
-  //autouzupelnianie do wyszukiwarki
-  $( function() {
-    $( '#wstaw' ).autocomplete({
-      source: 'php/index.php'
-    });
-  });	
-  */
-
+  
 
   //wyszukiwarka
   function wyszukiwarka() {
     var viewparams = ['nazwa:' + document.getElementById('wstaw').value];
     var defaultParam = {
       service: 'WFS',
-      version: '1.3.0',
+      version: '1.1.0',
       request: 'GetFeature',
       typeName: ' grody:wyszukiwarka',
       maxFeatures: 1000,
@@ -519,7 +539,7 @@
           }, 
           onEachFeature: function (feature, layer) {
             var popup = new L.Popup();
-            popup.setContent(feature.properties.nazwa + '</li><li><b>Opis:</b> ' + feature.properties.opis +  '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li></ul>');
+            popup.setContent(feature.properties.nazwa + '<li><b>Opis:</b> ' + feature.properties.opis +  '</li><li><b>Wiek:</b> ' + feature.properties.informacje + '</li><li><b>Źródło:</b> ' + feature.properties.zrodlo + '</li>');
             layer.bindPopup(popup);
 
   			
@@ -532,36 +552,23 @@
   }
 
 
-
 //połączenie funkcji wszukiwarka z przyciskiem 'szukaj' za pomoca id search1
 
-  var setButton3 = document.getElementById('search1'); 
-  setButton3.addEventListener('click', wyszukiwarka);
+var setButton3 = document.getElementById('search1'); 
+setButton3.addEventListener('click', wyszukiwarka);
 
-//funkcja czyszczaca 
-
-  function czysc3(d)
-  {
-    if(map.hasLayer(wyszukaj))map.removeLayer(wyszukaj);
-    map.fitBounds(grody.getBounds());
-  	
-  }
 
 //dodanie funkcji do przycisku
-  var clearButton3 = document.getElementById('clear4'); 
-  clearButton3.addEventListener('click', wymaz);
+var clearButton3 = document.getElementById('clear4'); 
+clearButton3.addEventListener('click', wymaz);
+
+//dodanie kontrolki skali mapy
+L.control.scale().addTo(map);
+//dodanie kontrolki pozycji myszki
+L.control.coordinates({position:'bottomright'}).addTo(map);
 
 
 
-
-
-  //dodanie kontrolki skali mapy
-  L.control.scale().addTo(map);
-  //dodanie kontrolki pozycji myszki
-  L.control.coordinates({position:'bottomright'}).addTo(map);
-  function updatevariable(data) {
-    funkcja_ii = data;
-  }
 
 
    </script>

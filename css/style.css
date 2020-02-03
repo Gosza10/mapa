@@ -1,5 +1,7 @@
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:300i|Noto+Sans+KR|Titillium+Web&display=swap" \a     rel="stylesheet');
 /* Variables */
+/*Źródło: https://www.flaticon.com*/
 /* Global */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -16,7 +18,7 @@ body {
 .container {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 auto;
 }
 
 .splash {
@@ -153,11 +155,11 @@ body {
 /*Navigation*/
 .navigation {
   background: #34495e;
-  padding: 12px 0;
+  padding: 10px 0;
   display: block;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Fira Sans", sans-serif;
   font-size: 25px;
-  text-align: left;
+  position: relative;
 }
 
 .navigation ul {
@@ -165,17 +167,30 @@ body {
   padding: 0;
   margin: 0;
   text-decoration: none;
+  right: 10px;
 }
 
 .navigation .iteam {
   display: inline-block;
-  margin: 0 36px 0 0;
   position: relative;
 }
 
 .navigation .iteam > a {
   text-decoration: none;
   color: #ffffff;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 20px;
+  right: 3px;
+}
+
+.logo {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 1;
+  text-align: center;
+  margin: 40px;
+  padding-bottom: 30px;
 }
 
 /*css do glowna.html*/
@@ -241,17 +256,6 @@ body {
   padding: 50px;
   border: 1px solid #444;
   border-radius: 5px;
-}
-
-/* Logo */
-.logo {
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 400;
-  font-size: 80px;
-  line-height: 1;
-  text-align: center;
-  margin: 40px;
-  padding-bottom: 30px;
 }
 
 /* Lists */

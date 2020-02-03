@@ -13,6 +13,10 @@ $font-logo: 'Fira Sans', sans-serif;
 $font-text: 'Titillium Web', sans-serif;
 $font-header: 'Noto Sans KR', sans-serif;
 
+
+
+/*Źródło: https://www.flaticon.com*/
+
 /* Global */
 
 *, *::before, *::after {
@@ -30,7 +34,8 @@ body {
 .container {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 auto;
+
 }
 
 .splash {
@@ -52,6 +57,7 @@ left: 0;
 width: 100%;
 height: 100%;
 z-index: 0;
+
 }
 
 #panel{
@@ -143,7 +149,6 @@ z-index: 1;
 }
 
 
-
 #zasieg, #ksztalt_gr, #wiek_gr, #wyszukaj {
   position: fixed; 
   top: 300px; 
@@ -180,35 +185,46 @@ z-index: 1;
 }
 
 
-
-
-
 /*Navigation*/
 .navigation {
     background: $color-one;
-    padding: 12px 0;
+    padding: 10px 0;
     display: block;
-    font-family: $font-header;
+    font-family: $font-logo;
     font-size: 25px;
-    text-align: left;
+    position: relative;
         
     ul {
         list-style-type: none;
         padding: 0;
         margin: 0;
         text-decoration: none;
+        right: 10px;
   }
 
   .iteam {
         display: inline-block;
-        margin: 0 36px 0 0;
         position: relative;
 
         > a {
             text-decoration: none;
             color: $color-two;
+            font-family: $font-text;
+            font-size: 20px;
+            right: 3px;
         }
     }
+}
+
+
+.logo {
+  font-family: $font-header;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 1;
+  text-align: center;
+  margin: 40px;
+  padding-bottom: 30px;
 }
 
 /*css do glowna.html*/
@@ -236,9 +252,6 @@ z-index: 1;
   height: 400px;
   object-fit: cover;
 }
-
-
-
 
 
 .section-title {
@@ -275,18 +288,6 @@ z-index: 1;
   padding: 50px;
   border: 1px solid $color-dark;
   border-radius: 5px;
-}
-
-/* Logo */
-
-.logo {
-  font-family: $font-header;
-  font-weight: 400;
-  font-size: 80px;
-  line-height: 1;
-  text-align: center;
-  margin: 40px;
-  padding-bottom: 30px;
 }
 
 /* Lists */
